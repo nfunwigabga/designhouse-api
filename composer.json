@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
+        "cviebrock/eloquent-taggable": "^6.0",
         "fideloper/proxy": "^4.0",
         "grimzy/laravel-mysql-spatial": "^2.2",
         "intervention/image": "^2.5",
