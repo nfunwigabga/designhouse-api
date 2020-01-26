@@ -15,7 +15,6 @@ class MeController extends Controller
         if(auth()->check()){
             $user = auth()->user();
             return new UserResource($user);
-            // return response()->json(["user" => $user], 200);
         }
         return response()->json(null, 401);
     }
