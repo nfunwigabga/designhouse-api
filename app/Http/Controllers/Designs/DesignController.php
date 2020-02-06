@@ -74,7 +74,6 @@ class DesignController extends Controller
     {
         $design = $this->designs->find($id);
         $this->authorize('delete', $design);
-
         // delete the files associated to the record
         foreach(['thumbnail', 'large', 'original'] as $size){
             // check if the file exists in the database
@@ -82,9 +81,7 @@ class DesignController extends Controller
                 Storage::disk($design->disk)->delete("uploads/designs/{$size}/".$design->image);
             }
         }
-
         $this->designs->delete($id);
-        
         return response()->json(['message' => 'Record deleted'], 200);
 
     }
@@ -100,4 +97,12 @@ class DesignController extends Controller
         $isLiked = $this->designs->isLikedByUser($designId);
         return response()->json(['liked' => $isLiked], 200);
     }
+
+    public function search(Request $request)
+    {
+        $designs = $this->designs->search($request);
+        return DesignResource::collection($designs);
+    }
+
+    
 }
