@@ -61,6 +61,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'available_to_hire' => 'boolean'
     ];
     
     public function sendEmailVerificationNotification()

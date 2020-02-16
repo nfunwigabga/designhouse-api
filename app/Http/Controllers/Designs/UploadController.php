@@ -21,11 +21,12 @@ class UploadController extends Controller
         // validate the request
         $this->validate($request, [
             'image' => ['required', 'mimes:jpeg,gif,bmp,png', 'max:2048']
-        ]);
-        
+        ]); 
+
         // get the image
         $image = $request->file('image');
         $image_path = $image->getPathName();
+
 
         // get the original file name and replace any spaces with _
         // Business Cards.png = timestamp()_business_cards.png
@@ -48,7 +49,7 @@ class UploadController extends Controller
 
         // dispatch a job to handle the image manipulation
         $this->dispatch(new UploadImage($design));
-
+        
         return response()->json($design, 200);
 
     }

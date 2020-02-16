@@ -24,7 +24,11 @@ class Design extends Model
         'disk'
     ];
 
-
+    protected $casts=[
+        'is_live' => 'boolean',
+        'upload_successful' => 'boolean',
+        'close_to_comments' => 'boolean'
+    ];
 
     public function user()
     {

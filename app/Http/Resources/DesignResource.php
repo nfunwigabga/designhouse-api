@@ -35,6 +35,7 @@ class DesignResource extends JsonResource
                 'updated_at' => $this->updated_at
             ],
             'team' => $this->team ? [
+                'id' => $this->team->id,
                 'name' => $this->team->name,
                 'slug' => $this->team->slug
             ] : null,
