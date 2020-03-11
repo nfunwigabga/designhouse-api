@@ -88,8 +88,11 @@ class DesignController extends Controller
 
     public function like($id)
     {
-        $this->designs->like($id);
-        return response()->json(['message' => 'Successful'], 200);
+        $total = $this->designs->like($id);
+        return response()->json([
+            'message' => 'Successful',
+            'total' => $total
+        ], 200);
     }
 
     public function checkIfUserHasLiked($designId)
@@ -106,7 +109,10 @@ class DesignController extends Controller
 
     public function findBySlug($slug)
     {
-        $design = $this->designs->withCriteria([new IsLive()])->findWhereFirst('slug', $slug);
+        $design = $this->designs->withCriteria([
+                new IsLive(), 
+                new EagerLoad(['user', 'comments'])
+            ])->findWhereFirst('slug', $slug);
         return new DesignResource($design);
     }
 
@@ -121,7 +127,7 @@ class DesignController extends Controller
     public function getForUser($userId)
     {
         $designs = $this->designs
-                        ->withCriteria([new IsLive()])
+                        //->withCriteria([new IsLive()])
                         ->findWhere('user_id', $userId);
         return DesignResource::collection($designs);
     }

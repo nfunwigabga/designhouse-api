@@ -39,6 +39,8 @@ class DesignRepository extends BaseRepository implements IDesign
         } else {
             $design->like();
         }
+
+        return $design->likes()->count();
     }
 
     public function isLikedByUser($id)
@@ -78,7 +80,7 @@ class DesignRepository extends BaseRepository implements IDesign
             $query->latest();
         }
 
-        return $query->get();
+        return $query->with('user')->get();
     }
     
 

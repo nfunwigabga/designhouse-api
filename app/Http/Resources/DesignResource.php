@@ -39,6 +39,7 @@ class DesignResource extends JsonResource
                 'name' => $this->team->name,
                 'slug' => $this->team->slug
             ] : null,
+            'comments_count' => $this->comments()->count(),
             'comments' => CommentResource::collection(
                             $this->whenLoaded('comments')),
             'user' => new UserResource($this->whenLoaded('user'))
